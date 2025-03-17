@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<hthtmlhthtmlmlml lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😎SOHIL KHAN😎</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: monospace;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+            font-weight: bold;
+       html min-height: 100vh;
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .header {
+            color: #FF4500;
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+
+        .info-container {
+            background-color: rgba(0, 17, 0, 0.9);
+            border: 1px solid #00FF00;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .period-text {
+            color: #00FF00;
+            font-size: 16px;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .timer-text {
+            color: #FF4500;
+            font-size: 24px;
+            margin-top: 10px;
+            text-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+        }
+
+        .level-text {
+            color: #FFD700;
+            font-size: 18px;
+            margin-top: 10px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .results-table {
+            border: 1px solid #00FF00;
+            background-color: rgba(0, 17, 0, 0.9);
+            border-radius: 8px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .table-title {
+            color: #00FF00;
+            font-size: 20px;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #00FF00;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .result-row {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .result-row:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+        }
+
+        .period-row {
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            margin: 20px 0;
+            gap: 15px;
+            position: sticky;
+            bottom: 20px;
+        }
+
+        .telegram-button, .register-button {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-button {
+            background-color: #0088cc;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .register-button {
+            background-color: #FF4500;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .telegram-button:hover, .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .telegram-button:active, .register-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 17, 0, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00FF00;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00CC00;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                font-size: 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-rain"></canvas>
+
+    <div class="header">
+        <i class="security-icon">🔒</i>
+        <span>HACK BY SOHIL KHAN😎</span>
+        <i class="security-icon">🔒</i>
+    </div>
+
+    <div class="info-container">
+        <div class="period-text" id="period-display">PERIOD: </div>
+        <div class="timer-text" id="countdown-display">Countdown: 00:59</div>
+        <div class="level-text" id="level-display">LEVEL: 0</div>
+    </div>
+
+    <div class="results-table">
+        <div class="table-title">Recent History</div>
+        <div id="recent-history"></div>
+    </div>
+
+    <div class="results-table">
+        <div class="table-title">All Results</div>
+        <div id="all-results"></div>
+    </div>
+
+    <div class="button-container">
+        <a href="https://t.me/+bVehiQxEiDxkZDZl" class="telegram-button" target="_blank">
+            <span>📱</span>
+            Join Telegram
+        </a>
+        <a href="https://btwwin.me/#/register?invitationCode=65832330505" class="register-button" target="_blank">
+            <span>📝</span>
+            Register Now
+        </a>
+    </div>
+
+    <script>
+        let countdown = 59;
+        let currentPeriod = '';
+        let history = [];
+        let allResults = [];
+        let level = 0;
+
+        // Audio feedback
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playTickSound() {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            gainNode.gain.value = 0.1;
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.05);
+        }
+
+        function generateNewResult() {
+            const now = new Date();
+            const period = now.toISOString().slice(0, 10).replace(/-/g, '') + '1000' + 
+                String(10001 + now.getUTCHours() * 60 + now.getUTCMinutes());
+            
+            const number = Math.floor(Math.random() * 10);
+            const pattern = number <= 4 ? 'SMALL' : 'BIG';
+            const result = `${pattern} (${number})`;
+
+            currentPeriod = period;
+            document.getElementById('period-display').textContent = `PERIOD: ${period}`;
+            
+            const newResult = { period, result, pattern };
+            history.unshift(newResult);
+            if (history.length > 5) history.pop();
+            
+            allResults.unshift(newResult);
+            
+            level = pattern === 'BIG' ? 0 : Math.min(level + 1, 2);
+            document.getElementById('level-display').textContent = `LEVEL: ${level}`;
+            
+            updateTables();
+            playTickSound();
+        }
+
+        function updateTables() {
+            const recentHistory = document.getElementById('recent-history');
+            recentHistory.innerHTML = history.map(item => `
+                <div class="result-row">
+                    <div class="period-row">PERIOD: ${item.period}</div>
+                    <div style="color: ${item.pattern === 'SMALL' ? '#7CFC00' : '#FF0000'}">
+                        RESULT: ${item.result}
+                    </div>
+                </div>
+            `).join('');
+
+            const allResultsDiv = document.getElementById('all-results');
+            allResultsDiv.innerHTML = allResults.map(item => `
+                <div class="result-row">
+                    <div class="period-row">PERIOD: ${item.period}</div>
+                    <div style="color: ${item.pattern === 'SMALL' ? '#7CFC00' : '#FF0000'}">
+                        RESULT: ${item.result}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateTimer() {
+            document.getElementById('countdown-display').textContent = 
+                `Countdown: 00:${countdown.toString().padStart(2, '0')}`;
+            if (countdown <= 10) {
+                playTickSound();
+            }
+        }
+
+        setInterval(() => {
+            countdown--;
+            if (countdown < 0) {
+                countdown = 59;
+                generateNewResult();
+            }
+            updateTimer();
+        }, 1000);
+
+        // Matrix rain effect with improved performance
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00FF00';
+            ctx.font = `${fontSize}px monospace`;
+
+            drops.forEach((y, x) => {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                const opacity = Math.random() * 0.5 + 0.5;
+                ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`;
+                ctx.fillText(text, x * fontSize, y * fontSize);
+                drops[x] = y * fontSize > canvas.height && Math.random() > 0.975 ? 0 : y + 1;
+            });
+        }
+
+        setInterval(drawMatrix, 50);
+
+        // Initial generation
+        generateNewResult();
+    </script>
+</body>
+</html>
